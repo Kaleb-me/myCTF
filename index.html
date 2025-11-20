@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>💥My Awesome Decoder⚡️</title>
+        </head>
+    <!--Emojis I have yet to add to my awesome webpage: 🍕󠅝󠅩󠄳󠅄󠄶󠅫󠅄󠅘󠅑󠅞󠅛󠅣󠅏󠅀󠅑󠅥󠅜󠅏󠄲󠅥󠅤󠅜󠅕󠅢󠄪󠅘󠅤󠅤󠅠󠅣󠄪󠄟󠄟󠅠󠅑󠅥󠅜󠅒󠅥󠅤󠅜󠅕󠅢󠄞󠅟󠅢󠅗󠄟󠄢󠄠󠄢󠄥󠄟󠅣󠅝󠅥󠅗󠅗󠅜󠅙󠅞󠅗󠄝󠅑󠅢󠅒󠅙󠅤󠅢󠅑󠅢󠅩󠄝󠅔󠅑󠅤󠅑󠄝󠅤󠅘󠅢󠅟󠅥󠅗󠅘󠄝󠅑󠅞󠄝󠅕󠅝󠅟󠅚󠅙󠄟󠅭 -->
+
+        <body>
+            <p>I don't know how to use CSS 🤖👾💻, so I copied and pasted
+                a bunch of emojis 😆󠅭 from a website to give this website some style! 🥳🤩
+            </p>
+            <p>But now that I think about it, the website was kinda sketchy... 🤨🧐 I think they were hiding a secret message somewhere. 🫣😳 Can you check if my website is hosting smuggled data? 📊</p>
+           <form>
+            <br>Kaleb's All-Purpose Decoder 😎<br>
+            <input type="text" id="input">
+           </form> 
+        </body>
+
+        <button id="button">🔥LETS GOOOOO🔥</button>
+        <p>v Decoded input below v</p>
+        <p id="result">
+
+        <!-- textbox needs to have id="input"-->
+        <!-- button needs to have id="button"-->
+        <!-- decoding result needs to have id="result"-->
+        <script>
+            const element =
+            document.getElementById("button");
+            var string = document.getElementById("input").value;
+            element.addEventListener("click", onClick);
+
+            function onClick() {
+                 var string = document.getElementById("input").value;
+                 decode(string);
+
+            }
+            
+            function variationSelectorToByte(ch) {
+                const code = ch.codePointAt(0);
+
+                if (0xFE00 <= code && code <= 0xFE0F) {
+                    return code - 0xFE00;
+                }
+                if (0xE0100 <= code && code <= 0xE01EF) {
+                    return code - 0xE0100 + 16;
+                }
+                return null;
+            }
+
+            function decode(str) {
+                let bytes = [];
+                let started = false;
+
+                for (const ch of str) {
+                    const b = variationSelectorToByte(ch);
+
+                    if (b !== null) {
+                        bytes.push(b);
+                        started = true;
+                    } else if (started) {
+                        break;
+                    }
+                }
+
+                array = new Uint8Array(bytes);
+                text = new TextDecoder("utf-8").decode(array);
+                document.getElementById("result").innerHTML = text;
+
+            }
+        </script>
+    </html>
+
+    
