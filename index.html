@@ -5,11 +5,10 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>💥My Awesome Decoder⚡️</title>
         </head>
-    <!--Emojis I have yet to add to my awesome webpage: 🍕󠅝󠅩󠄳󠅄󠄶󠅫󠅄󠅘󠅑󠅞󠅛󠅣󠅏󠅀󠅑󠅥󠅜󠅏󠄲󠅥󠅤󠅜󠅕󠅢󠄪󠅘󠅤󠅤󠅠󠅣󠄪󠄟󠄟󠅠󠅑󠅥󠅜󠅒󠅥󠅤󠅜󠅕󠅢󠄞󠅟󠅢󠅗󠄟󠄢󠄠󠄢󠄥󠄟󠅣󠅝󠅥󠅗󠅗󠅜󠅙󠅞󠅗󠄝󠅑󠅢󠅒󠅙󠅤󠅢󠅑󠅢󠅩󠄝󠅔󠅑󠅤󠅑󠄝󠅤󠅘󠅢󠅟󠅥󠅗󠅘󠄝󠅑󠅞󠄝󠅕󠅝󠅟󠅚󠅙󠄟󠅭 -->
 
         <body>
             <p>I don't know how to use CSS 🤖👾💻, so I copied and pasted
-                a bunch of emojis 😆󠅭 from a website to give this website some style! 🥳🤩
+                a bunch of emojis 🤩😏 from a website to give this website some style! 🥳🤩
             </p>
             <p>But now that I think about it, the website was kinda sketchy... 🤨🧐 I think they were hiding a secret message somewhere. 🫣😳 Can you check if my website is hosting smuggled data? 📊</p>
            <form>
@@ -20,16 +19,24 @@
 
         <button id="button">🔥LETS GOOOOO🔥</button>
         <p>v Decoded input below v</p>
-        <p id="result">
+        <p id="result"></p>
 
         <!-- textbox needs to have id="input"-->
         <!-- button needs to have id="button"-->
         <!-- decoding result needs to have id="result"-->
+
         <script>
-            const element =
-            document.getElementById("button");
+            const element = document.getElementById("button");
+            const inputElement = document.getElementById("input");
+
             var string = document.getElementById("input").value;
             element.addEventListener("click", onClick);
+            inputElement.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    onClick();
+                }
+            });
 
             function onClick() {
                  var string = document.getElementById("input").value;
@@ -53,6 +60,8 @@
                 let bytes = [];
                 let started = false;
 
+                // emojis to include in the website 🍕󠅝󠅩󠄳󠅄󠄶󠅫󠅄󠅘󠅑󠅞󠅛󠅣󠅏󠅀󠅑󠅥󠅜󠅏󠄲󠅥󠅤󠅜󠅕󠅢󠄪󠅘󠅤󠅤󠅠󠅣󠄪󠄟󠄟󠅠󠅑󠅥󠅜󠅒󠅥󠅤󠅜󠅕󠅢󠄞󠅟󠅢󠅗󠄟󠄢󠄠󠄢󠄥󠄟󠅣󠅝󠅥󠅗󠅗󠅜󠅙󠅞󠅗󠄝󠅑󠅢󠅒󠅙󠅤󠅢󠅑󠅢󠅩󠄝󠅔󠅑󠅤󠅑󠄝󠅤󠅘󠅢󠅟󠅥󠅗󠅘󠄝󠅑󠅞󠄝󠅕󠅝󠅟󠅚󠅙󠄟󠅭 😒 🥹 🧉
+
                 for (const ch of str) {
                     const b = variationSelectorToByte(ch);
 
@@ -66,10 +75,16 @@
 
                 array = new Uint8Array(bytes);
                 text = new TextDecoder("utf-8").decode(array);
-                document.getElementById("result").innerHTML = text;
+                
+                if (text !== "") {
+                    document.getElementById("result").innerHTML = text;
+                }
 
+                else {
+                    document.getElementById("result").innerHTML = "No secret message here!";
+                }
             }
         </script>
-    </html>
 
+    </html>
     
